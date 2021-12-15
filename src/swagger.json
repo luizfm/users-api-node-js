@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User api",
+    "description": "This is an user api using NodeJS done as challenge at Rocketseat Ignite",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API support",
+      "email": "luizfm.developer@gmail.com"
+      }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create user",
+        "description": "It creates a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Luiz",
+                "email": "luizfm.developer@gmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get users",
+        "description": "Get all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "The user id who is requiring the list of users",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get a user",
+        "description": "Get a unique user by id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The required user profile id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "User does not exist"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Updates a user",
+        "description": "Turn a given user on admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "The user id that will be turned into admin",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User updated"
+          },
+          "404": {
+            "description": "User does not exist"
+          }
+        }
+      }
+    }
+  }
+}
